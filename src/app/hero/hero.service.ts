@@ -7,11 +7,17 @@ import { MessageService } from '../message/message.service';
 @Injectable({ //metadata object
   providedIn: 'root'
 })
+
 export class HeroService {
   constructor(private messageService: MessageService) { } //service-in-service
 
   getHeroes(): Observable<Hero[]> {
     this.messageService.add('HeroService: fetched heroes');
     return of(HEROES); //emits a single value, array of mock heroes
+  }
+
+  getHero(id: number): Observable<Hero> {
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
   }
 }
