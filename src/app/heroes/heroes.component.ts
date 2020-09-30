@@ -23,4 +23,13 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes); 
     //async - waits for observable to emit array, subscribe passes emitted array to callback and sets component's hero prop
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if(!name) { return; }
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
 }
