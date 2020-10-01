@@ -1,0 +1,15 @@
+<div id="search">
+    <h4><label for="search-box">Hero Search</label></h4>
+
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+    <ul class="search-result">
+        <li *ngFor="let hero of heroes$ | async"> 
+            <!-- 
+                heroes$ means it's an observable and not an array
+                since *ngFor can't do anything with an Observable, use "| async" to subscribe automatically
+            -->
+            <a routerLink="/detail/{{hero.id}}">{{hero.name}}</a>
+        </li>
+    </ul>
+</div>
